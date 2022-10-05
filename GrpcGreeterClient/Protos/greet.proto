@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcGreeterClient";
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc CalculateSum (CalculateRequest) returns (CalculateResponse);
+  rpc GetBumps (GetBumpsRequest) returns (stream GetBumpsResponse);
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
+
+message CalculateRequest {
+  int32 x = 1;
+  int32 y = 2;
+}
+
+message CalculateResponse {
+  int32 result = 1;
+}
+
+message GetBumpsRequest {
+  int32 number_of_dies = 1;
+  int32 bumps_in_die = 2;
+  int32 limit_per_message = 3;
+}
+
+message Bump {
+  int32 id = 1;
+  float die_x_cord = 2;
+  float die_y_cord = 3;
+  float wafer_x_cord = 4;
+  float wafer_y_cord = 5;
+  int32 type = 6;
+  float height = 7;
+  float cop = 8;
+  int32 die_id = 9;
+  string wafer_id = 10;
+}
+
+message GetBumpsResponse {
+  repeated Bump bump = 1;
+  int32 die_id = 2;
+}
